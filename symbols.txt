@@ -1,0 +1,5 @@
+debugger_storage = 0x85000;
+debugger_stack = 0x83000;
+debugger_entry = 0x81000;
+uart_get = 0x00000000000803a8;
+uart_send = 0x0000000000080384;

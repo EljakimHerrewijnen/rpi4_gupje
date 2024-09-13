@@ -1,0 +1,3 @@
+[submodule "rpi4-baremetal-uart"]
+	path = rpi4-baremetal-uart
+	url = https://github.com/EljakimHerrewijnen/rpi4-baremetal-uart
