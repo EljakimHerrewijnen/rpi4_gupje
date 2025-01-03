@@ -1,5 +1,5 @@
 # Gupje RPi4
-This code is built on top of [this repository](https://github.com/ethanfaust/rpi4-baremetal-uart.git) and contains code to run the debugger on a raspberry pi 3/4 and in Qemu.
+This code is built on top of [this repository](https://github.com/ethanfaust/rpi4-baremetal-uart.git) and contains code to run ``Gupje`` on a raspberry pi 3/4 and in Qemu.
 
 The goal is to have a software(qemu) and hardware(pi4) code platform to test ``Gupje`` on.
 
