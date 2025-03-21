@@ -3,11 +3,25 @@ This code is built on top of [this repository](https://github.com/ethanfaust/rpi
 
 The goal is to have a software(qemu) and hardware(pi4) code platform to test ``Gupje`` on.
 
-## Usage
-Clone with --recursive to also clone the RPI4 code:
-
+## Setup
+Install ``qemu`` and setup a python venv:
 ```bash
-git clone --recursive https://github.com/EljakimHerrewijnen/rpi4_gupje
+$ sudo apt install qemu-system-arm
+$ python3 -m venv venv/
+$ source venv/bin/activate
+4 pip install -r requirements.txt
 ```
 
-You can test this code using ``qemu.py``, which will start qemu and attach the debugger into it.
+Build the raspberry pi baremetal code:
+
+```bash
+$ cd rpi4-baremetal-uart
+$ make
+```
+
+## Usage
+You can test this code using ``qemu.py``, which will start qemu and attach the debugger into it. I recommend using vscode for stepping through the python code.
+
+```bash
+$ python3 qemu.py
+```
