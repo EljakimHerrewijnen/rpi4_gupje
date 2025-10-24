@@ -1,3 +1,6 @@
+import sys
+sys.path.append("../../") # To find qemu module
+
 from qemu import *
 
 if TYPE_CHECKING:
@@ -6,6 +9,7 @@ if TYPE_CHECKING:
 
     cd.arch_dbg = GA_arm64_debugger(0, 0, 0)
     cd.arch_dbg.state = ARM64_Concrete_State()
+
 
 cd.memdump_region(0x80000, 0x100)
 cd.memdump_region(0x80000, 0x2000) # TODO fix big chunks

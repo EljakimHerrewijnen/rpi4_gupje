@@ -11,8 +11,9 @@ from ghidra_assistant.utils.archs.arm64.arm64_stepper import ARM64Stepper
 ks = Ks(KS_ARCH_ARM64, KS_MODE_LITTLE_ENDIAN)
 
 # qemu = subprocess.run(['make', 'qemu_debugger'], shell=True) # Will run qemu
-kernel_path = (pathlib.Path(__file__).resolve().parent / "rpi4-baremetal-uart" / "kernel8.img").resolve()
-qemu = subprocess.Popen(f"qemu-system-aarch64 -smp 4 -M raspi3b -kernel {kernel_path} -serial pty -display none".split(" "),  stdout=subprocess.PIPE, universal_newlines=True) # Will run qemu
+kernel_path = (pathlib.Path(__file__).resolve().parent / "prebuild" / "kernel8.img").resolve()
+command = f"qemu-system-aarch64 -smp 4 -M raspi3b -kernel {kernel_path} -serial pty -display none"
+qemu = subprocess.Popen(command.split(" "), stdout=subprocess.PIPE, universal_newlines=True) # Will run qemu
 
 device = ""
 while True:
@@ -38,12 +39,6 @@ while True:
 DEBUGGER_PATH = pathlib.Path(__file__).resolve().parent.parent.parent / "bin" / "rpi4" / "debugger.bin"
 debugger = DEBUGGER_PATH.open("rb").read()
 
-# Test shellcode
-shellcode = """
-    ret
-"""
-
-# debugger = ks.asm(shellcode, as_bytes=True)[0]
 debugger = debugger + ((0x2000 - len(debugger)) * b"\xcc")
 assert ser.write(debugger) == 0x2000, "Failed to write the debugger"
 
@@ -73,8 +68,6 @@ assert recv_uart_data(length=4) == b"GiAs", "Could not jump in debugger"
 class RaspberryPi4():
     def __init__(self, serial_device) -> None:
         self.ser = serial_device
-        # self.read = ser.read
-        # self.write = ser.write
         
     def read(self, length):
         remaining = length
@@ -122,3 +115,4 @@ pi4 = RaspberryPi4(ser)
 cd = ConcreteDevice(None, False)
 cd = pi4.setup_concrete_device(cd)
 
+pass
