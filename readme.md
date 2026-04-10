@@ -20,12 +20,21 @@ $ cd rpi4-baremetal-uart
 $ make
 ```
 
-Get the usb_send and usb_recv symbols from the built kernel8.elf:
+Get the uart_send(``uart_send``) and uart_get(``uart_get``) symbols from the built kernel8.elf:
 ```bash
-➜  rpi4_gupje git:(paging_example) ✗ readelf -a prebuild/kernel8.elf | grep uart_puts
+(venv) ➜  rpi4_gupje git:(paging_example) ✗ readelf -a prebuild/kernel8.elf | grep uart_   
+    25: 00000000000801ac    36 FUNC    GLOBAL DEFAULT    1 uart_get
+    27: 0000000000080188    36 FUNC    GLOBAL DEFAULT    1 uart_send
     34: 0000000000080204    88 FUNC    GLOBAL DEFAULT    1 uart_puts
-➜  rpi4_gupje git:(paging_example) ✗ readelf -a prebuild/kernel8.elf | grep uart_getc
+    35: 0000000000080050   312 FUNC    GLOBAL DEFAULT    1 uart_init
+    36: 000000000008025c    84 FUNC    GLOBAL DEFAULT    1 uart_hex
     39: 00000000000801d0    52 FUNC    GLOBAL DEFAULT    1 uart_getc
+```
+
+Update the symbols.txt:
+```text
+uart_get = 0x00000000000801ac;
+uart_send = 0x0000000000080188;
 ```
 
 Build gupje. First download an NDK and set it to your environment:

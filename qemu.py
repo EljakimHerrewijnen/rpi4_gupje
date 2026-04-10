@@ -32,9 +32,6 @@ while True:
     data += ser.read_all()
     if b"SEND DEBUGGER" in data:
         break
-    
-# UART_SEND = data.decode().split("\n")[0].strip().split(": ")[1]
-# UART_RECV = data.decode().split("\n")[1].strip().split(": ")[1]
 
 DEBUGGER_PATH = pathlib.Path(__file__).resolve().parent.parent.parent / "bin" / "rpi4" / "debugger.bin"
 debugger = DEBUGGER_PATH.open("rb").read()
