@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Pi4 GDB Bridge",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "gdb_example.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Pi4 Stepper Example",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "example_stepper_ok.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Pi4 Stepper Overlap Failure",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "example_stepper_overlap_failure.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}

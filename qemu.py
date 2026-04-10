@@ -4,7 +4,6 @@ import subprocess
 from keystone import *
 from ghidra_assistant.concrete_device import ConcreteDevice
 from ghidra_assistant.utils.debugger.debugger_archs.ga_arm64 import GA_arm64_debugger
-from qiling.const import *
 from ghidra_assistant.utils.utils import *
 from ghidra_assistant.utils.archs.arm64.arm64_stepper import ARM64Stepper
 
@@ -24,7 +23,7 @@ while True:
             if "pts" in d:
                 device = d
         break
-    
+
 ser = serial.Serial(device, timeout=.001)
 ser.write(b"a")
 data = b""
@@ -57,7 +56,7 @@ def recv_uart_data(timeout=100, length=0):
         else:
             t1 = time.time()
             dat += d
-    return dat       
+    return dat
 
 assert recv_uart_data(length=4) == b"JUMP", "Could not jump in debugger"
 assert recv_uart_data(length=4) == b"GiAs", "Could not jump in debugger"
@@ -65,7 +64,7 @@ assert recv_uart_data(length=4) == b"GiAs", "Could not jump in debugger"
 class RaspberryPi4():
     def __init__(self, serial_device) -> None:
         self.ser = serial_device
-        
+
     def read(self, length):
         remaining = length
         d = b""
@@ -78,16 +77,15 @@ class RaspberryPi4():
         # self.ser.flush()
         assert len(d) == length, f"Failed to read {length} bytes, got {len(d)} bytes"
         return d
-    
+
     def write(self, data):
         self.ser.write(data)
-    
+
     def setup_concrete_device(self, concrete_device: ConcreteDevice) -> ConcreteDevice:
         from ghidra_assistant.utils.debugger.debugger_archs.ga_arm64 import GA_arm64_debugger  # Import here for type hinting
-        from qiling.const import QL_ARCH  # Import here for type hinting
 
         # Setup architecture
-        concrete_device.arch = QL_ARCH.ARM64
+        concrete_device.arch = "arm64"
         concrete_device.ga_debugger_location = 0x81000  # TODO, not used yet
         concrete_device.ga_vbar_location = 0x81000 + 0x1000
         concrete_device.ga_storage_location = 0x85000

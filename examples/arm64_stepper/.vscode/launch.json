@@ -11,6 +11,7 @@
             "request": "launch",
             "program": "example_stepper.py",
             "console": "integratedTerminal",
+            "justMyCode": false
         }
     ]
 }
