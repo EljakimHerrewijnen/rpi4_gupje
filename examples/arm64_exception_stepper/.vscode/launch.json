@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Load TEE",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "load_tee_env.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Load TEE Stepper",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "load_tee_env.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": ["--use-stepper"]
+        },
+    ]
+}

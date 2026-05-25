@@ -7,7 +7,8 @@
             "request": "launch",
             "program": "gdb_example.py",
             "console": "integratedTerminal",
-            "justMyCode": false
+            "justMyCode": false,
+            "args": ["--entry" , "0x96000"]
         },
         {
             "name": "Pi4 Stepper Example",
@@ -22,6 +23,15 @@
             "request": "launch",
             "program": "example_stepper_overlap_failure.py",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Pi4 GDB Breakpoint Target",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "example_gdb_breakpoint_target.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": ["--entry" , "0x96000"]
         }
     ]
 }

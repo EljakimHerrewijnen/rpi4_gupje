@@ -12,7 +12,12 @@ ks = Ks(KS_ARCH_ARM64, KS_MODE_LITTLE_ENDIAN)
 # qemu = subprocess.run(['make', 'qemu_debugger'], shell=True) # Will run qemu
 kernel_path = (pathlib.Path(__file__).resolve().parent / "prebuild" / "kernel8.img").resolve()
 command = f"qemu-system-aarch64 -smp 4 -M raspi3b -kernel {kernel_path} -serial pty -display none"
-qemu = subprocess.Popen(command.split(" "), stdout=subprocess.PIPE, universal_newlines=True) # Will run qemu
+qemu = subprocess.Popen(
+    command.split(" "),
+    stdout=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
+    universal_newlines=True,
+) # Will run qemu
 
 device = ""
 while True:
@@ -109,5 +114,6 @@ from typing import TYPE_CHECKING
 pi4 = RaspberryPi4(ser)
 cd = ConcreteDevice(None, False)
 cd = pi4.setup_concrete_device(cd)
+cd.fetch_special_regs()
 
 pass
